@@ -14,12 +14,16 @@ def main():
             print("Le chemin spécifié est incorrect")
             path = input("Chemin d'accès du projet : ")
 
-    allowed_extensions = ["java", "py", "c", "h", "cpp", "hpp", "cs", "ino", "sql", "js", "php", "sql", "html", "css"]
+    allowed_extensions = ["java", "py", "c", "h", "cpp", "hpp", "cs", "ino",
+                          "sql",
+                          "js", "php", "sql", "html", "css",
+                          # "resx", "sln", "cvxproj", "filters"
+                          ]
     # "java", "py", "c", "cs", "js", "php", "sql", "html", "css", "json", "txt"
 
     exclude_dirs = ["venv", "Lib", "lib", "Library", ".idea", ".settings", "bin", "LWJGL 3", "LWJGL 3 + Assets",
                     "New-Beginner-Java-Game-Programming-Src-master", "Build Tools Spigot Minecraft",
-                    "node_modules", "Lux-Viewer-2021-master", ".vscode", ".metadata", "x64", ".vs", ".git"]
+                    "node_modules", "Lux-Viewer-2021-master", ".vscode", ".metadata", "x64", ".vs", ".git", "html_temp"]
 
     extension_lines = {}
     for extension in allowed_extensions:
@@ -57,13 +61,11 @@ def explore_dir(path, extension_lines, allowed_extensions, exclude_dirs):
     return
 
 
-def count_lines(file_path: str, extension_lines: dict[str, int], allowed_extensions: list[str]) -> dict[str, int]:
+def count_lines(file_path: str, extension_lines: dict[str, int], allowed_extensions: list[str]):
     if os.path.exists(file_path) and os.path.isfile(file_path):
         p, extension = os.path.splitext(file_path)
         if extension != "" and len(extension) > 1 and extension[1:] in allowed_extensions:
-            # print("Lecture du fichier:", file_path)
-            # if extension[1:] == "java":
-            #     print("Fichier java:", file_path)
+            print("Lecture du fichier:", file_path)
             read_lines_file(file_path, extension, extension_lines)
     else:
         print("Le chemin spécifié du fichier est incorrect")
